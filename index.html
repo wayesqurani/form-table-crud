@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Form with Table + Bulk Actions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+ 
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- Form Section -->
+      <div class="bg-white p-6 rounded-lg shadow-md w-full lg:w-1/2">
+        <h2 class="text-2xl font-semibold mb-4">Submit Your Info</h2>
+        <form id="userForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Name</label>
+            <input type="text" id="name" name = "name" required class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" id="email" name = "email" required class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Phone</label>
+            <input type="text" id="phone" name = "phon" required class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+          </div>
+          <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit</button>
+        </form>
+      </div>
+
+      <!-- Table Section -->
+      <div class="bg-white p-6 rounded-lg shadow-md w-full lg:w-1/2">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-semibold">Submitted Info</h2>
+          <div class="space-x-2">
+            <button onclick="bulkClone()" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-sm">Bulk Clone</button>
+            <button onclick="bulkDelete()" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm">Bulk Delete</button>
+            <button onclick="bulkUpdate()" class="bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700 text-sm ml-2">
+  Bulk Update </button>
+
+          </div>
+        </div>
+
+        <div class="overflow-auto max-h-[500px] min-h-[300px]">
+          <table class="min-w-full text-sm text-left border border-gray-200">
+            <thead class="bg-gray-200 text-gray-700">
+              <tr>
+                <th class="p-2 border">
+                  <input type="checkbox" id="selectAll" onchange="toggleAll(this)" />
+                </th>
+                <th class="p-2 border">Name</th>
+                <th class="p-2 border">Email</th>
+                <th class="p-2 border">Phone</th>
+                <th class="p-2 border">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="dataBody" class="text-gray-800">
+              <!-- Rows inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Edit Entry Modal -->
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+    <h2 class="text-xl font-semibold mb-4">Update Entry</h2>
+    <form id="editForm" class="space-y-4">
+      <input type="hidden" id="editEntryID" />
+      <div>
+        <label class="block text-sm font-medium">Name</label>
+        <input type="text" id="editName" class="w-full p-2 border rounded"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Email</label>
+        <input type="email" id="editEmail" class="w-full p-2 border rounded"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium">Phone</label>
+        <input type="text" id="editPhone" class="w-full p-2 border rounded" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <button type="button" id="cancelEdit" class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+ <script src="index.js"></script>
+</body>
+</html>
